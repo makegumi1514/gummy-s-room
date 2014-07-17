@@ -1,0 +1,57 @@
+class Hit {
+  float x, y, r;
+  Hit(){
+    x=random(width);
+    y=random(height);
+    r = 50;
+  }
+  void draw() {
+    ellipse(x,y,2*r,2*r);
+  }
+  boolean HitCircle(float px,float py){
+    float dx = px - x;
+    float dy = py - y;
+    return dx*dx+dy*dy < r*r;
+  }
+}
+
+Hit target;
+float pressedX,pressedY;
+float draggedX,draggedY;
+float releasedX,releasedY;
+float originX,originY;
+
+void setup(){
+  size(300,300);
+  target = new Hit();
+}
+
+void draw(){
+  background(255);
+  target.draw();
+}
+
+void mousePressed(){
+  pressedX=mouseX;
+  pressedY=mouseY;
+  originX=target.x;
+  originY=target.y;
+}
+  
+void mouseDragged(){
+  draggedX=mouseX;
+  draggedY=mouseY;
+  if(target.HitCircle(mouseX,mouseY)){
+    /*
+    target.x=draggedX;
+    target.y=draggedY;
+    */
+    target.x=originX+draggedX-pressedX;
+    target.y=originY+draggedY-pressedY;
+  }
+}
+
+void mouseReleased(){
+  releasedX=mouseX;
+  releasedY=mouseY;
+}
