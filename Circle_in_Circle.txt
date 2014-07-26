@@ -1,0 +1,36 @@
+float x0,y0;
+float r0,r;
+float h;
+
+boolean Outside(float x,float y){
+  float dx=x-x0;
+  float dy=y-y0;
+  float dr=r0-r;
+  return dx*dx+dy*dy>dr*dr;
+}
+
+void InsideCircle(float mx,float my){
+  float px=mx-x0;
+  float py=my-y0;
+  float pr=r0-r;
+  float s=sqrt(px*px+py*py);
+  float t=pr/s;
+  ellipse(t*px+x0,t*py+y0,2*r,2*r);
+}
+
+void setup(){
+  size(300,300);
+  x0=width/2; y0=height/2;
+  r0=100; r=10;
+}
+
+void draw(){
+  background(255);
+  println("pr=",sqrt((mouseX-x0)*(mouseX-x0)+(mouseY-y0)*(mouseY-y0)));
+  ellipse(x0,y0,2*r0,2*r0);
+  ellipse(mouseX,mouseY,2*r,2*r);
+  
+  if(Outside(mouseX,mouseY)){
+    InsideCircle(mouseX,mouseY);
+  }
+}
