@@ -1,0 +1,26 @@
+using UnityEngine;
+using System.Collections;
+
+public class Scorespot : MonoBehaviour {
+	public Score score;
+	public Spawner spawn;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	}
+
+	void OnCollisionEnter(Collision col){
+		score.score += 5;
+		Destroy (col.gameObject);
+		spawn.stopCoin = false;
+	}
+
+	/*void OnTriggerEnter(Collider col){
+		score.score += 5;
+	}*/
+}

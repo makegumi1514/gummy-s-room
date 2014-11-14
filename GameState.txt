@@ -1,0 +1,45 @@
+using UnityEngine;
+using System.Collections;
+
+public class GameState : MonoBehaviour {
+
+	public Score score;
+	public Spawner spawn;
+
+	private float waitTime=10;
+	public float timer = 0;
+	public bool timeup=false;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		timer += Time.deltaTime;
+		if (spawn.stopCoin && timer > waitTime) {
+			timeup=true;
+		}
+		if (timeup) {
+			Debug.Log ("timeup");
+		}
+		Debug.Log (timer);
+
+		if (score.score <= 0 || score.score >= 150) {
+			spawn.stopCoin = true;
+		}
+
+		string displayText;
+		if (timeup && score.score <= 0) {
+			displayText = "GAMEOVER";
+			guiText.text = displayText;
+		} else if (score.score >= 150) {
+			displayText = "GAMECLEAR";
+			guiText.text = displayText;
+		} else {
+			displayText = "PLAYING";
+			guiText.text = displayText;
+		}
+	}
+}
