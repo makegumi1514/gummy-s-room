@@ -1,0 +1,80 @@
+void setup(){
+  size(480,480,P3D);
+}
+
+void quad(PVector v1,PVector v2,PVector v3,PVector v4){
+  vertex(v1.x, v1.y, v1.z);
+  vertex(v2.x, v2.y, v2.z);
+  vertex(v3.x, v3.y, v3.z);
+  vertex(v2.x, v2.y, v2.z);
+  vertex(v3.x, v3.y, v3.z);
+  vertex(v4.x, v4.y, v4.z);
+}
+
+//gorioshi
+/*void cylinder(PVector v,int angle){
+  PVector v1=new PVector(v.x*cos(0)               ,  v.y, v.z*sin(0));
+  PVector v2=new PVector(v.x*cos(TWO_PI/angle)    ,  v.y, v.z*sin(TWO_PI/angle));
+  PVector v3=new PVector(v.x*cos(0)               , -v.y, v.z*sin(0));
+  PVector v4=new PVector(v.x*cos(TWO_PI/angle)    , -v.y, v.z*sin(TWO_PI/angle));
+  quad(v1,v2,v3,v4);
+  PVector v5=new PVector(v.x*cos(TWO_PI/angle)    ,  v.y, v.z*sin(TWO_PI/angle));
+  PVector v6=new PVector(v.x*cos((TWO_PI/angle)*2),  v.y, v.z*sin((TWO_PI/angle)*2));
+  PVector v7=new PVector(v.x*cos(TWO_PI/angle)    , -v.y, v.z*sin(TWO_PI/angle));
+  PVector v8=new PVector(v.x*cos((TWO_PI/angle)*2), -v.y, v.z*sin((TWO_PI/angle)*2));
+  quad(v5,v6,v7,v8);
+  PVector v9 =new PVector(v.x*cos((TWO_PI/angle)*2),  v.y, v.z*sin((TWO_PI/angle)*2));
+  PVector v10=new PVector(v.x*cos((TWO_PI/angle)*3),  v.y, v.z*sin((TWO_PI/angle)*3));
+  PVector v11=new PVector(v.x*cos((TWO_PI/angle)*2), -v.y, v.z*sin((TWO_PI/angle)*2));
+  PVector v12=new PVector(v.x*cos((TWO_PI/angle)*3), -v.y, v.z*sin((TWO_PI/angle)*3));
+  quad(v9,v10,v11,v12);
+  PVector v13=new PVector(v.x*cos((TWO_PI/angle)*3),  v.y, v.z*sin((TWO_PI/angle)*3));
+  PVector v14=new PVector(v.x*cos((TWO_PI/angle)*4),  v.y, v.z*sin((TWO_PI/angle)*4));
+  PVector v15=new PVector(v.x*cos((TWO_PI/angle)*3), -v.y, v.z*sin((TWO_PI/angle)*3));
+  PVector v16=new PVector(v.x*cos((TWO_PI/angle)*4), -v.y, v.z*sin((TWO_PI/angle)*4));
+  quad(v13,v14,v15,v16);
+  PVector v17=new PVector(v.x*cos((TWO_PI/angle)*4),  v.y, v.z*sin((TWO_PI/angle)*4));
+  PVector v18=new PVector(v.x*cos((TWO_PI/angle)*5),  v.y, v.z*sin((TWO_PI/angle)*5));
+  PVector v19=new PVector(v.x*cos((TWO_PI/angle)*4), -v.y, v.z*sin((TWO_PI/angle)*4));
+  PVector v20=new PVector(v.x*cos((TWO_PI/angle)*5), -v.y, v.z*sin((TWO_PI/angle)*5));
+  quad(v17,v18,v19,v20);
+  PVector v21=new PVector(v.x*cos((TWO_PI/angle)*5),  v.y, v.z*sin((TWO_PI/angle)*5));
+  PVector v22=new PVector(v.x*cos((TWO_PI/angle)*6),  v.y, v.z*sin((TWO_PI/angle)*6));
+  PVector v23=new PVector(v.x*cos((TWO_PI/angle)*5), -v.y, v.z*sin((TWO_PI/angle)*5));
+  PVector v24=new PVector(v.x*cos((TWO_PI/angle)*6), -v.y, v.z*sin((TWO_PI/angle)*6));
+  quad(v21,v22,v23,v24);
+}*/
+
+//kairyo
+void cylinder(PVector v,int angle,int count){
+  PVector v1=new PVector(v.x*cos((TWO_PI/angle)*(count+0)),  v.y, v.z*sin((TWO_PI/angle)*(count+0)));
+  PVector v2=new PVector(v.x*cos((TWO_PI/angle)*(count+1)),  v.y, v.z*sin((TWO_PI/angle)*(count+1)));
+  PVector v3=new PVector(v.x*cos((TWO_PI/angle)*(count+0)), -v.y, v.z*sin((TWO_PI/angle)*(count+0)));
+  PVector v4=new PVector(v.x*cos((TWO_PI/angle)*(count+1)), -v.y, v.z*sin((TWO_PI/angle)*(count+1)));
+  //quad(v1,v2,v3,v4);
+  count++;
+  if(count>angle) return;
+  quad(v1,v2,v3,v4);
+  cylinder(v,angle,count);
+}
+
+float ry=0;
+
+void draw(){
+  background(100);
+  lights();
+  translate(width/2,height/2);
+  rotateX(-0.5f);
+  rotateY(ry);
+  ry+=0.01f;
+  
+  beginShape(TRIANGLES);
+  
+  PVector v=new PVector(100,100,100);
+  
+  //cylinder(v,6);
+  //cylinder(v,6,0);
+  cylinder(v,8,3);
+  
+  endShape();
+}
