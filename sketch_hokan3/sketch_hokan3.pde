@@ -11,14 +11,11 @@ void setup(){
   size(400,400);
   t=0;
   v=0.01f;
-  p=new PVector(0,0);
-  q=new PVector(200,300);
-  r=new PVector(400,400);
   a=new PVector[3];
+  a[0]=new PVector(0,0);
+  a[1]=new PVector(200,300);
+  a[2]=new PVector(400,400);
   b=new PVector();
-  a[0]=p;
-  a[1]=q;
-  a[2]=r;
   count=0;
   i=1;
 }
